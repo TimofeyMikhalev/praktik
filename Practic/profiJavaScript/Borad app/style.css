@@ -1,0 +1,45 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    height: 500px;
+    width: 500px;
+
+    margin: 100px auto;
+
+    border: 1px solid #000000;
+    border-radius: 20px;
+    background: linear-gradient(#000000, #ffffff);
+}
+
+.title {
+    font-size: 25px;
+}
+
+.text {
+    font-size: 20px;
+    font-style: italic;
+
+}
+
+.btn,
+.btnTwo {
+    color: #ffffff;
+    background: #0094FF;
+    border: none;
+    padding: 10px 135px;
+    cursor: pointer;
+}
+
+.active {
+    background: linear-gradient(#00B01C33, #ffffff);
+}
+
+.img {
+    width: 200px;
+    height: 200px;
+    margin: 20px 0;
+}
+

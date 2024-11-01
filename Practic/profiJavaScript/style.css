@@ -1,0 +1,28 @@
+
+.list_pages {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 300px;
+ 
+}
+
+.pages{
+    text-align: center;
+    list-style-type: none;
+    transition: all .3;
+}
+
+
+a {
+    text-decoration: none;
+    font-size: 30px;
+    line-height: 2;
+    color: #3A3939;
+}
+
+.pages:hover {
+    opacity: 0.5;
+}
+
