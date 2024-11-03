@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memes api</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <div class="container">
+        <div class="setting">
+            <div class="title">Настройки:</div>
+            <form class="form">
+                <label class="country" for="country">Мем</label>
+                <select class="mem" id="mem" name="mem">
+                  <option value="australia">Australia</option>
+                  <option value="canada">Canada</option>
+                  <option value="usa">USA</option>
+                </select>
+            
+                <label for="ltext">Текст сверху</label>
+                <input type="text" id="ltext" name="lasttext" placeholder="Введите текст...">
+                
+                <label for="ftext">Текст снизу</label>
+                <input type="text" id="ftext" name="firsttext" placeholder="Введите текст...">
+            </form>
+        </div>
+        <div class="previe">
+            <div class="title">Превью:</div>
+            <!-- <img class="img_mem" src="" alt=""> -->
+        </div>
+    </div>
+
+    <script src="model.js"></script>
+    <script src="view.js"></script>
+    <script src="api.js"></script>
+    <script src="controller.js"></script>
+    <script type="module" src="main.js"></script>
+</body>
+</html>

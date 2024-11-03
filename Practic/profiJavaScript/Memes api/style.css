@@ -1,0 +1,68 @@
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    width: 100%;
+    height: auto;
+}
+
+.container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    width: 80%;
+    height: auto;
+
+    margin-top: 100px;
+}
+
+.setting {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+
+    margin-right: 200px;
+}
+
+.title {
+    font-size: 50px;
+    font-weight: 700;
+}
+
+.form {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+
+    width: 100%;
+    height: auto;
+
+    margin-top: 42px;
+}
+
+label{
+    font-size: 35px;
+    margin-bottom: 13px;
+}
+
+.mem, input {
+    width: 400px;
+    font-size: 25px;
+    border-radius: 20px;
+    padding: 10px;
+    margin-bottom: 40px;
+    border: 1px solid #000;
+    cursor: pointer;
+}
+
+.img_mem {
+    width: 560px;
+    height: 335px;
+    border-radius: 30px;
+    margin-top: 76px;
+}
