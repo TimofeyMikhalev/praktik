@@ -60,9 +60,37 @@ label{
     cursor: pointer;
 }
 
+.previe {
+    position: relative;
+}
+
 .img_mem {
+    display: none;
     width: 560px;
     height: 335px;
     border-radius: 30px;
     margin-top: 76px;
+
+}
+
+.action {
+    display: flex;
+}
+
+.text_up {
+    font-size: 35px;
+    position: absolute;
+    top: 160px;
+    left: 213px;
+    z-index: 10;
+    color: #fff;
+}
+
+.text_down {
+    font-size: 35px;
+    position: absolute;
+    top: 400px;
+    left: 213px;
+    z-index: 10;
+    color: #fff;
 }
