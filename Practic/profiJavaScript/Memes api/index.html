@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
-    <div class="container">
+    <!-- Функциональный способ -->
+    <!-- <div class="container">
         <div class="setting">
             <div class="title">Настройки:</div>
             <form class="form">
@@ -28,6 +28,24 @@
             <div class="text_up"></div>
             <div class="text_down"></div>
         </div>
+    </div> -->
+
+    <!-- Классовый способ -->
+    <div class="setting">
+        <p>Мем</p>
+        <select class="js-memes-select"></select>
+        
+        <p>Подпись сверху</p>
+        <input type="text" class="js-text-top-input">
+
+        <p>Подпись снизу</p>
+        <input type="text" class="js-text-bottom-input">
+    </div>
+
+    <div class="preview">
+        <p class="js-top-text"></p>
+        <p class="js-bottom-text"></p>
+        <img class="js-image">
     </div>
 
     <script src="model.js"></script>
