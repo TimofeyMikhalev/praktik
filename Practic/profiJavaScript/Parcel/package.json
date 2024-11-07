@@ -1,0 +1,17 @@
+{
+  "name": "todos",
+  "source": "src/index.html",
+  "scripts": {
+    "start": "rm -rf .parcel-cache && parcel"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "firebase": "^11.0.1"
+  },
+  "devDependencies": {
+    "buffer": "^6.0.3",
+    "process": "^0.11.10"
+  }
+}
