@@ -1,18 +1,42 @@
+import {v4 as uuidv4} from 'uuid';
+
 //тудушки хранятся локально
 export function createTodosMode(todos) {
     return {
-        todos,
-        update: function(todos) {
-            this.todos = todos;
+        todosIds: [], 
+        todosById: { },
+        addTodo: function({ title }) {
+            const todo = {
+                title,
+                done: false,
+                id: uuidv4()
+            }
+            this.todosIds.push(todo.id);
+            this.todosById[todo. id] = todo;
+            
+            return todo
         },
-        add: function(todo) {
-            this.todos.push(todo);
+        setTodos : function(todos) {
+            this.todosIds = [];
+            this.todosById= {};
+
+            todos.forEach(todo => {
+                this.todosIds.push(todo.id),
+                this.todosById[todo.id] = todo
+            })
         },
-        get: function() {
-            return this.todos;
+        getTodos: function() {
+            return {
+                todosById: this.todosById,
+                todosIds: this.todosIds
+            }
         },
-        clear: function() {
-            this.todos = [];
+        toggleTodo: function(id) {
+            this.todosById[id].done = !this.todosById[id].done 
+        },
+        getTodo: function(id) {
+
+            return this.todosById[id]
         }
     };
 }

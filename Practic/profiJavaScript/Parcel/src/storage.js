@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore, serverTimestamp } from "firebase/firestore";
-import { collection, doc,  addDoc, getDocs, writeBatch, serverTimestamp, query, orderBy } from "firebase/firestore";
+import { collection, doc, setDoc, getDocs, writeBatch, serverTimestamp, query, orderBy, updateDoc } from "firebase/firestore";
 
 
 const firebaseConfig = {
@@ -30,7 +30,8 @@ export function createStorage(key) {
             querySnapshot.forEach((doc) => { 
                 todos.push({
                     id: doc.id,
-                    title: doc.data().title
+                    title: doc.data().title,
+                    done: doc.data().done
                 })
             });
 
@@ -39,27 +40,31 @@ export function createStorage(key) {
         push: async function(todo) {
             try {
                 //создаю новый документ в bd, для этого вызываю addDoc передаю в какую коллекцию нужно записать и что нужно записать
-                const docRef = await addDoc(collection(this.db, this.key), {
+                await setDoc(doc(this.db, this.key, todo.id), {
                   title: todo.title,
-                  status: todo.status,
+                  done: todo.done,
                   createdAt: serverTimestamp()
                 });
-                //true исход
-                console.log("Document written with ID: ", docRef.id);
               } catch (e) {
                 //false исход
                 console.error("Error adding document: ", e);
             }
         },
-        delete: async function(todos) {
+        delete: async function({ todosIds }) {
             const batch = writeBatch(this.db);
 
-            todos.forEach((todo) => {
-                const ref = doc(this.db, this.key, todo.id);
+            todosIds.forEach((id) => {
+                const ref = doc(this.db, this.key, id);
                 batch.delete(ref)
             })
             await batch.commit()
+        },
+        update: async function(todo) {
+            const ref = doc(this.db, this.key, todo.id);
 
+            await updateDoc(ref, {
+                done: todo.done
+            });
         }
     }
 }

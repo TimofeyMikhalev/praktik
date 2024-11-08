@@ -593,32 +593,35 @@ const btnNode = document.querySelector(".js-btn");
 const btnClearNode = document.querySelector(".js-clear-btn");
 const initialTodos = [];
 const model = (0, _model.createTodosMode)(initialTodos);
-const view = (0, _view.createView)(".js-output");
+const view = (0, _view.createView)(".js-output", handleClickTodo);
 const storage = (0, _storage.createStorage)((0, _constans.TODOS_STORAGE_KEY));
 //получаем тудушки при старте из хранилища
 storage.pull().then((todos)=>{
-    model.update(todos);
+    model.setTodos(todos);
     //вызывали рендер
-    view.render(model.get());
+    view.renderTodos(model.getTodos());
 });
 //обработчик события
 btnNode.addEventListener("click", function() {
-    const todo = {
-        title: inputNode.value,
-        status: "active"
-    };
+    const todoTitle = inputNode.value;
     //тудушку в model
-    model.add(todo);
+    const todo = model.addTodo({
+        title: todoTitle
+    });
     //вызывали рендер
-    view.render(model.get());
+    view.addTodo(todo);
     storage.push(todo);
 });
 //обработчик события - отчистки списка
 btnClearNode.addEventListener("click", function() {
-    storage.delete(model.get());
-    model.clear();
-    view.render(model.get());
+    storage.delete(model.getTodos());
+    model.setTodos([]);
+    view.clearTodos();
 });
+function handleClickTodo(id) {
+    model.toggleTodo(id);
+    storage.update(model.getTodo(id));
+}
 
 },{"./constans":"a7iG5","./model":"dEDha","./storage":"bkDau","./view":"ai2uB"}],"a7iG5":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -657,26 +660,169 @@ exports.export = function(dest, destName, get) {
 };
 
 },{}],"dEDha":[function(require,module,exports) {
-//тудушки хранятся локально
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+//тудушки хранятся локально
 parcelHelpers.export(exports, "createTodosMode", ()=>createTodosMode);
+var _uuid = require("uuid");
 function createTodosMode(todos) {
     return {
-        todos,
-        update: function(todos) {
-            this.todos = todos;
+        todosIds: [],
+        todosById: {},
+        addTodo: function({ title }) {
+            const todo = {
+                title,
+                done: false,
+                id: (0, _uuid.v4)()
+            };
+            this.todosIds.push(todo.id);
+            this.todosById[todo.id] = todo;
+            return todo;
         },
-        add: function(todo) {
-            this.todos.push(todo);
+        setTodos: function(todos) {
+            this.todosIds = [];
+            this.todosById = {};
+            todos.forEach((todo)=>{
+                this.todosIds.push(todo.id), this.todosById[todo.id] = todo;
+            });
         },
-        get: function() {
-            return this.todos;
+        getTodos: function() {
+            return {
+                todosById: this.todosById,
+                todosIds: this.todosIds
+            };
         },
-        clear: function() {
-            this.todos = [];
+        toggleTodo: function(id) {
+            this.todosById[id].done = !this.todosById[id].done;
+        },
+        getTodo: function(id) {
+            return this.todosById[id];
         }
     };
+}
+
+},{"uuid":"j4KJi","@parcel/transformer-js/src/esmodule-helpers.js":"6ctMh"}],"j4KJi":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "MAX", ()=>(0, _maxJsDefault.default));
+parcelHelpers.export(exports, "NIL", ()=>(0, _nilJsDefault.default));
+parcelHelpers.export(exports, "parse", ()=>(0, _parseJsDefault.default));
+parcelHelpers.export(exports, "stringify", ()=>(0, _stringifyJsDefault.default));
+parcelHelpers.export(exports, "v1", ()=>(0, _v1JsDefault.default));
+parcelHelpers.export(exports, "v1ToV6", ()=>(0, _v1ToV6JsDefault.default));
+parcelHelpers.export(exports, "v3", ()=>(0, _v3JsDefault.default));
+parcelHelpers.export(exports, "v4", ()=>(0, _v4JsDefault.default));
+parcelHelpers.export(exports, "v5", ()=>(0, _v5JsDefault.default));
+parcelHelpers.export(exports, "v6", ()=>(0, _v6JsDefault.default));
+parcelHelpers.export(exports, "v6ToV1", ()=>(0, _v6ToV1JsDefault.default));
+parcelHelpers.export(exports, "v7", ()=>(0, _v7JsDefault.default));
+parcelHelpers.export(exports, "validate", ()=>(0, _validateJsDefault.default));
+parcelHelpers.export(exports, "version", ()=>(0, _versionJsDefault.default));
+var _maxJs = require("./max.js");
+var _maxJsDefault = parcelHelpers.interopDefault(_maxJs);
+var _nilJs = require("./nil.js");
+var _nilJsDefault = parcelHelpers.interopDefault(_nilJs);
+var _parseJs = require("./parse.js");
+var _parseJsDefault = parcelHelpers.interopDefault(_parseJs);
+var _stringifyJs = require("./stringify.js");
+var _stringifyJsDefault = parcelHelpers.interopDefault(_stringifyJs);
+var _v1Js = require("./v1.js");
+var _v1JsDefault = parcelHelpers.interopDefault(_v1Js);
+var _v1ToV6Js = require("./v1ToV6.js");
+var _v1ToV6JsDefault = parcelHelpers.interopDefault(_v1ToV6Js);
+var _v3Js = require("./v3.js");
+var _v3JsDefault = parcelHelpers.interopDefault(_v3Js);
+var _v4Js = require("./v4.js");
+var _v4JsDefault = parcelHelpers.interopDefault(_v4Js);
+var _v5Js = require("./v5.js");
+var _v5JsDefault = parcelHelpers.interopDefault(_v5Js);
+var _v6Js = require("./v6.js");
+var _v6JsDefault = parcelHelpers.interopDefault(_v6Js);
+var _v6ToV1Js = require("./v6ToV1.js");
+var _v6ToV1JsDefault = parcelHelpers.interopDefault(_v6ToV1Js);
+var _v7Js = require("./v7.js");
+var _v7JsDefault = parcelHelpers.interopDefault(_v7Js);
+var _validateJs = require("./validate.js");
+var _validateJsDefault = parcelHelpers.interopDefault(_validateJs);
+var _versionJs = require("./version.js");
+var _versionJsDefault = parcelHelpers.interopDefault(_versionJs);
+
+},{"./max.js":false,"./nil.js":false,"./parse.js":false,"./stringify.js":false,"./v1.js":false,"./v1ToV6.js":false,"./v3.js":false,"./v4.js":"8zJtu","./v5.js":false,"./v6.js":false,"./v6ToV1.js":false,"./v7.js":false,"./validate.js":false,"./version.js":false,"@parcel/transformer-js/src/esmodule-helpers.js":"6ctMh"}],"5Y9F1":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "unsafeStringify", ()=>unsafeStringify);
+var _validateJs = require("./validate.js");
+var _validateJsDefault = parcelHelpers.interopDefault(_validateJs);
+const byteToHex = [];
+for(let i = 0; i < 256; ++i)byteToHex.push((i + 0x100).toString(16).slice(1));
+function unsafeStringify(arr, offset = 0) {
+    return (byteToHex[arr[offset + 0]] + byteToHex[arr[offset + 1]] + byteToHex[arr[offset + 2]] + byteToHex[arr[offset + 3]] + "-" + byteToHex[arr[offset + 4]] + byteToHex[arr[offset + 5]] + "-" + byteToHex[arr[offset + 6]] + byteToHex[arr[offset + 7]] + "-" + byteToHex[arr[offset + 8]] + byteToHex[arr[offset + 9]] + "-" + byteToHex[arr[offset + 10]] + byteToHex[arr[offset + 11]] + byteToHex[arr[offset + 12]] + byteToHex[arr[offset + 13]] + byteToHex[arr[offset + 14]] + byteToHex[arr[offset + 15]]).toLowerCase();
+}
+function stringify(arr, offset = 0) {
+    const uuid = unsafeStringify(arr, offset);
+    if (!(0, _validateJsDefault.default)(uuid)) throw TypeError("Stringified UUID is invalid");
+    return uuid;
+}
+exports.default = stringify;
+
+},{"./validate.js":"eHPgI","@parcel/transformer-js/src/esmodule-helpers.js":"6ctMh"}],"eHPgI":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _regexJs = require("./regex.js");
+var _regexJsDefault = parcelHelpers.interopDefault(_regexJs);
+function validate(uuid) {
+    return typeof uuid === "string" && (0, _regexJsDefault.default).test(uuid);
+}
+exports.default = validate;
+
+},{"./regex.js":"bUa5g","@parcel/transformer-js/src/esmodule-helpers.js":"6ctMh"}],"bUa5g":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+exports.default = /^(?:[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$/i;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"6ctMh"}],"8zJtu":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _nativeJs = require("./native.js");
+var _nativeJsDefault = parcelHelpers.interopDefault(_nativeJs);
+var _rngJs = require("./rng.js");
+var _rngJsDefault = parcelHelpers.interopDefault(_rngJs);
+var _stringifyJs = require("./stringify.js");
+function v4(options, buf, offset) {
+    if ((0, _nativeJsDefault.default).randomUUID && !buf && !options) return (0, _nativeJsDefault.default).randomUUID();
+    options = options || {};
+    const rnds = options.random || (options.rng || (0, _rngJsDefault.default))();
+    rnds[6] = rnds[6] & 0x0f | 0x40;
+    rnds[8] = rnds[8] & 0x3f | 0x80;
+    if (buf) {
+        offset = offset || 0;
+        for(let i = 0; i < 16; ++i)buf[offset + i] = rnds[i];
+        return buf;
+    }
+    return (0, _stringifyJs.unsafeStringify)(rnds);
+}
+exports.default = v4;
+
+},{"./native.js":"lYayS","./rng.js":"2psyE","./stringify.js":"5Y9F1","@parcel/transformer-js/src/esmodule-helpers.js":"6ctMh"}],"lYayS":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+const randomUUID = typeof crypto !== "undefined" && crypto.randomUUID && crypto.randomUUID.bind(crypto);
+exports.default = {
+    randomUUID
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"6ctMh"}],"2psyE":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>rng);
+let getRandomValues;
+const rnds8 = new Uint8Array(16);
+function rng() {
+    if (!getRandomValues) {
+        if (typeof crypto === "undefined" || !crypto.getRandomValues) throw new Error("crypto.getRandomValues() not supported. See https://github.com/uuidjs/uuid#getrandomvalues-not-supported");
+        getRandomValues = crypto.getRandomValues.bind(crypto);
+    }
+    return getRandomValues(rnds8);
 }
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"6ctMh"}],"bkDau":[function(require,module,exports) {
@@ -708,7 +854,8 @@ function createStorage(key) {
             querySnapshot.forEach((doc)=>{
                 todos.push({
                     id: doc.id,
-                    title: doc.data().title
+                    title: doc.data().title,
+                    done: doc.data().done
                 });
             });
             return todos;
@@ -716,25 +863,29 @@ function createStorage(key) {
         push: async function(todo) {
             try {
                 //создаю новый документ в bd, для этого вызываю addDoc передаю в какую коллекцию нужно записать и что нужно записать
-                const docRef = await (0, _firestore.addDoc)((0, _firestore.collection)(this.db, this.key), {
+                await (0, _firestore.setDoc)((0, _firestore.doc)(this.db, this.key, todo.id), {
                     title: todo.title,
-                    status: todo.status,
+                    done: todo.done,
                     createdAt: (0, _firestore.serverTimestamp)()
                 });
-                //true исход
-                console.log("Document written with ID: ", docRef.id);
             } catch (e) {
                 //false исход
                 console.error("Error adding document: ", e);
             }
         },
-        delete: async function(todos) {
+        delete: async function({ todosIds }) {
             const batch = (0, _firestore.writeBatch)(this.db);
-            todos.forEach((todo)=>{
-                const ref = (0, _firestore.doc)(this.db, this.key, todo.id);
+            todosIds.forEach((id)=>{
+                const ref = (0, _firestore.doc)(this.db, this.key, id);
                 batch.delete(ref);
             });
             await batch.commit();
+        },
+        update: async function(todo) {
+            const ref = (0, _firestore.doc)(this.db, this.key, todo.id);
+            await (0, _firestore.updateDoc)(ref, {
+                done: todo.done
+            });
         }
     };
 }
@@ -28802,16 +28953,32 @@ var createWebChannelTransport;
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "createView", ()=>createView);
-function createView(selector) {
+function createView(selector, onClickTodo) {
     const node = document.querySelector(selector);
     return {
         node,
-        render: function(todos) {
-            let outputListHTML = "";
-            todos.forEach(function(todo) {
-                outputListHTML += `<li>${todo.title}</li>`;
+        renderTodos: function({ todosIds, todosById }) {
+            todosIds.forEach((id)=>{
+                this.addTodo(todosById[id]);
             });
-            this.node.innerHTML = `<ul>${outputListHTML}</ul>`;
+        },
+        clearTodos: function() {
+            this.node.innerHTML = "";
+        },
+        //Для вывода todo поотдельности
+        addTodo: function(todo) {
+            const div = document.createElement("div");
+            const input = document.createElement("input");
+            const label = document.createElement("label");
+            input.setAttribute("type", "checkbox");
+            input.setAttribute("id", todo.id);
+            input.onclick = ()=>{
+                onClickTodo(todo.id);
+            };
+            if (todo.done) input.setAttribute("checked", true);
+            label.innerText = todo.title, label.setAttribute("for", todo.id);
+            div.append(input, label);
+            this.node.append(div);
         }
     };
 }

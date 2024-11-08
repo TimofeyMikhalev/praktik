@@ -2,13 +2,15 @@
   "name": "todos",
   "source": "src/index.html",
   "scripts": {
-    "start": "rm -rf .parcel-cache && parcel"
+    "start": "rm -rf .parcel-cache && parcel",
+    "build": "parcel build --no-source-maps --dist-dir prod"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "firebase": "^11.0.1"
+    "firebase": "^11.0.1",
+    "uuid": "^11.0.2"
   },
   "devDependencies": {
     "buffer": "^6.0.3",

@@ -9,38 +9,42 @@ const btnClearNode = document.querySelector('.js-clear-btn');
 
 const initialTodos = [];
 const model = createTodosMode(initialTodos);
-const view = createView('.js-output');
+const view = createView('.js-output', handleClickTodo);
 const storage = createStorage(TODOS_STORAGE_KEY);
 
 //получаем тудушки при старте из хранилища
 storage.pull().then((todos) => {
-    model.update(todos);
+    model.setTodos (todos);
     //вызывали рендер
-    view.render(model.get());
+    view.renderTodos(model.getTodos());
 });
  
 
 //обработчик события
 btnNode.addEventListener('click', function() {
-    const todo = {
-        title: inputNode.value,
-        status: 'active'
-    };
+    const todoTitle = inputNode.value
     //тудушку в model
-    model.add(todo);
+   const todo = model.addTodo({
+        title: todoTitle
+    });
     //вызывали рендер
-    view.render(model.get());
+    view.addTodo(todo);
     
-    storage.push(todo );
+    storage.push(todo);
 });
 
 //обработчик события - отчистки списка
 btnClearNode.addEventListener('click', function() {
-    storage.delete(model.get());
+    storage.delete(model.getTodos());
 
-    model.clear();
+    model.setTodos([]);
 
-    view.render(model.get());
-
-
+    view.clearTodos(); 
 });
+
+
+function handleClickTodo(id) { 
+    model.toggleTodo(id)
+
+    storage.update(model.getTodo(id))
+}
