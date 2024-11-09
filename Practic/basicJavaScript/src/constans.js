@@ -1,0 +1,1 @@
+export const MOVIS_STORAGE_KEY = 'movis';

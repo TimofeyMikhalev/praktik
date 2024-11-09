@@ -1,0 +1,16 @@
+{
+    "name": "movie",
+    "source": "src/index.html",
+    "scripts": {
+        "start": "rm -rf .parcel-cache && parcel",
+        "build": "parcel build --no-source-maps --dist-dir prod"
+    },
+    "devDependencies": {
+        "buffer": "^6.0.3",
+        "parcel": "latest",
+        "process": "^0.11.10"
+    },
+    "dependencies": {
+        "firebase": "^11.0.1"
+    }
+}

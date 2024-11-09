@@ -1,0 +1,1 @@
+{"mappings":"AAAA,SAAS,gBAAgB,KAAK,GAE9B","sources":["src/model.js"],"sourcesContent":["function createMovieMode(movis) {\n    \n}"],"names":[],"version":3,"file":"index.a88da416.js.map","sourceRoot":"/__parcel_source_root/"}
