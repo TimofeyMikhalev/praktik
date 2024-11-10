@@ -723,14 +723,20 @@ let btnInput = document.querySelector(".search__btn");
 spisocFilms.addEventListener("click", function(e) {
     const btn = e.target.closest(".crestic");
     if (btn) btn.parentElement.remove(); // Удаляет родительский элемент <li> при клике на crestic
-    updateMovies();
+    // deleteField()
+    deleteItem();
 });
-async function updateMovies() {
-    const docRef = (0, _firestore.doc)(db, "collection", (0, _constans.MOVIS_STORAGE_KEY));
-    await (0, _firestore.updateDoc)(docRef, {
-        movie: (0, _firestore.arrayRemove)("Ti") // removes "1" from the array 
-    });
-}
+// async function deleteField() {
+//     const docRef = doc(db, MOVIS_STORAGE_KEY);
+//     try {
+//         await updateDoc(docRef, {
+//             movie: deleteField()
+//         });
+//         console.log("Поле успешно удалено");
+//     } catch(error) {
+//         console.error("Ошибка удаления поля:", error);
+//     }   
+// }
 // Ставим на фильме знак "прочитано" (вешаем активный класс)
 spisocFilms.addEventListener("click", function(e) {
     const film = e.target.closest(".film");
@@ -782,6 +788,14 @@ async function fetchItems() {
     }
 }
 fetchItems();
+async function deleteItem(id) {
+    try {
+        await (0, _firestore.deleteDoc)((0, _firestore.doc)(db, (0, _constans.MOVIS_STORAGE_KEY), id));
+        console.log(`\u{414}\u{43E}\u{43A}\u{443}\u{43C}\u{435}\u{43D}\u{442} \u{441} ID ${id} \u{443}\u{441}\u{43F}\u{435}\u{448}\u{43D}\u{43E} \u{443}\u{434}\u{430}\u{43B}\u{435}\u{43D}`);
+    } catch (error) {
+        console.error("\u041E\u0448\u0438\u0431\u043A\u0430 \u0443\u0434\u0430\u043B\u0435\u043D\u0438\u044F \u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0430:", error);
+    }
+}
 
 },{"./model":"dEDha","./storage":"bkDau","./view":"ai2uB","./constans":"a7iG5","firebase/app":"aM3Fo","firebase/firestore":"8A4BC"}],"dEDha":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
