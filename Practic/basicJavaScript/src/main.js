@@ -149,52 +149,43 @@
 ///Самостоятельная работа
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { collection, addDoc, getDocs, updateDoc, arrayRemove, doc, deleteField, deleteDoc } from "firebase/firestore"; 
-import { createMovieMode } from "./model";
-import { createStorageMovie } from "./storage";
-import { createViewMovie } from "./view";
+import { collection, addDoc, getDocs, doc, deleteDoc, setDoc } from "firebase/firestore"; 
 import { MOVIS_STORAGE_KEY } from "./constans";
 import { getFirestore } from "firebase/firestore";
 
-let crestic = document.querySelectorAll('.crestic');
-let film = document.querySelectorAll('.film');
 let spisocFilms = document.querySelector('.spisoc__films');
 let inputAdd = document.querySelector('.search__films');
 let btnInput = document.querySelector('.search__btn');
 
 
-// Удаление фильма из списка
-spisocFilms.addEventListener('click', async function(e) {
-    const btn = e.target.closest('.crestic');
-    // if (btn) {
-    //     btn.parentElement.remove(); // Удаляет родительский элемент <li> при клике на crestic
-    //     fetchDocumentIds()  
-    // }
+// // Удаление фильма из списка
+// spisocFilms.addEventListener('click', async function(e) {
+//     const btn = e.target.closest('.crestic');
+//     // if (btn) {
+//     //     btn.parentElement.remove(); // Удаляет родительский элемент <li> при клике на crestic
+//     //     fetchDocumentIds()  
+//     // }
   
-    // Добавляем обработчик клика для удаления элемента
-    btn.addEventListener("click", async (event) => {
-        event.stopPropagation(); // Предотвращаем срабатывание других событий на элементе
+//     // Добавляем обработчик клика для удаления элемента
+//     btn.addEventListener("click", async (event) => {
+//         event.stopPropagation(); // Предотвращаем срабатывание других событий на элементе
 
-        // Удаляем элемент из Firestore
-        await deleteItem(doc.id);
+//         // Удаляем элемент из Firestore
+//         await deleteItem(doc.id);
 
-        // Удаляем элемент из DOM
-        btn.parentElement.remove()
-    });
+//         // Удаляем элемент из DOM
+//         btn.parentElement.remove()
+//     });
+// });
 
 
-});
+
 
 
 
 
 // Ставим на фильме знак "прочитано" (вешаем активный класс)
-spisocFilms.addEventListener('click', function(e) {
-    const film = e.target.closest('.film');
-    if (film && !e.target.closest('.crestic')) {
-        film.classList.toggle('ready'); // Переключаем класс "ready" для элемента <li>
-    }
-});
+
 
 
 //Добавление фильма в список
@@ -213,7 +204,10 @@ btnInput.addEventListener('click', async function(e) {
     inputAdd.value = "";
 
 
+    
 });
+
+
 
 const firebaseConfig = {
     apiKey: "AIzaSyAvj1cTLGp0IVZMmcv6dUweiyAk2D1jYS4",
@@ -242,53 +236,6 @@ async function addMovies() {
     }
 }
 
-// Функция для получения данных из Firestore
-async function fetchItems() {
-    try {
-        const querySnapshot = await getDocs(collection(db, MOVIS_STORAGE_KEY)); // Замените "items" на название вашей коллекции
-        
-        querySnapshot.forEach((doc) => {
-            console.log(`${doc} => ${doc.data().movie}`);
-            console.log(`${doc} => ${doc.id}`);
-
-            let newLiHTML = `<li data-id = ${doc.id} class="film"><span class="circle"></span>${doc.data().movie}<span class="crestic"><svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg"><path opacity="0.3" d="M22.3575 3.74463L14.6021 11.5L22.3575 19.2554C22.7689 19.6667 23 20.2247 23 20.8064C23 21.3882 22.7689 21.9462 22.3575 22.3575C21.9462 22.7689 21.3882 23 20.8064 23C20.2247 23 19.6667 22.7689 19.2554 22.3575L11.5 14.6022L3.74463 22.3575C3.33326 22.7689 2.77532 23 2.19355 23C1.61179 23 1.05385 22.7689 0.642476 22.3575C0.231106 21.9462 7.3961e-07 21.3882 7.3961e-07 20.8064C7.3961e-07 20.2247 0.231106 19.6667 0.642476 19.2554L8.39785 11.5L0.642476 3.74463C0.231106 3.33326 0 2.77532 0 2.19355C0 1.61179 0.231106 1.05385 0.642476 0.642477C1.05385 0.231106 1.61178 7.3961e-07 2.19355 7.3961e-07C2.77532 7.3961e-07 3.33326 0.231106 3.74463 0.642477L11.5 8.39785L19.2554 0.642477C19.6667 0.231106 20.2247 0 20.8064 0C21.3882 0 21.9462 0.231106 22.3575 0.642477C22.7689 1.05385 23 1.61178 23 2.19355C23 2.77532 22.7689 3.33326 22.3575 3.74463Z" fill="#F3F6F9"/></svg></span></li>`;
-            spisocFilms.insertAdjacentHTML('beforeend', newLiHTML);
-           
-        });
-
-    } catch (error) {
-        console.error("Ошибка загрузки данных:", error);
-    }
-
-    
-}
-
-fetchItems();
-
-// Функция для получения и отображения ID документов
-async function fetchDocumentIds() {
-    try {
-      const querySnapshot = await getDocs(collection(db, MOVIS_STORAGE_KEY)); 
-      
-      querySnapshot.forEach((doc) => {
-        console.log("Document ID:", doc.id);         // Вывод ID документа в консоль
-        console.log("Document Data:", doc.data());   // Вывод данных документа в консоль
-      });
-    } catch (error) {
-      console.error("Ошибка получения данных:", error);
-    }
-}
-
-//удаление
-// async function deleteItem(movie) {
-//     try {
-//       await deleteDoc(doc(db, MOVIS_STORAGE_KEY, 'Ca8zodARBvCp5yVmwpI4'));
-//       console.log(`Документ с ID ${movie} успешно удален`);
-//     } catch (error) {
-//       console.error("Ошибка удаления документа:", error);
-//     }
-// }
-
 
 // Функция для удаления документа из Firestore
 async function deleteItem(id) {
@@ -301,46 +248,50 @@ async function deleteItem(id) {
 }
 
 
-// Функция для отображения элементов
 async function displayItems() {
 
-try {
+  try {
     const querySnapshot = await getDocs(collection(db, MOVIS_STORAGE_KEY));
     
     querySnapshot.forEach((doc) => {
-    // Создаем элемент списка с текстом и кнопкой удаления
-    // const li = document.createElement("li");
+      // Создаем элемент списка с текстом и кнопкой удаления
+      const newFilm = document.createElement("li");
+      newFilm.className = 'film'
+      newFilm.innerHTML = `<span class="circle"></span>${doc.data().movie}<span class="crestic"><svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg"><path opacity="0.3" d="M22.3575 3.74463L14.6021 11.5L22.3575 19.2554C22.7689 19.6667 23 20.2247 23 20.8064C23 21.3882 22.7689 21.9462 22.3575 22.3575C21.9462 22.7689 21.3882 23 20.8064 23C20.2247 23 19.6667 22.7689 19.2554 22.3575L11.5 14.6022L3.74463 22.3575C3.33326 22.7689 2.77532 23 2.19355 23C1.61179 23 1.05385 22.7689 0.642476 22.3575C0.231106 21.9462 7.3961e-07 21.3882 7.3961e-07 20.8064C7.3961e-07 20.2247 0.231106 19.6667 0.642476 19.2554L8.39785 11.5L0.642476 3.74463C0.231106 3.33326 0 2.77532 0 2.19355C0 1.61179 0.231106 1.05385 0.642476 0.642477C1.05385 0.231106 1.61178 7.3961e-07 2.19355 7.3961e-07C2.77532 7.3961e-07 3.33326 0.231106 3.74463 0.642477L11.5 8.39785L19.2554 0.642477C19.6667 0.231106 20.2247 0 20.8064 0C21.3882 0 21.9462 0.231106 22.3575 0.642477C22.7689 1.05385 23 1.61178 23 2.19355C23 2.77532 22.7689 3.33326 22.3575 3.74463Z" fill="#F3F6F9"/></svg></span>`; // Отображаем поле name
+      newFilm.dataset.id = doc.id; // Присваиваем ID документа в атрибут data-id
 
-    let newLiHTML = `<li data-id = ${doc.id} class="film"><span class="circle"></span>${doc.data().movie}<span class="crestic"><svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg"><path opacity="0.3" d="M22.3575 3.74463L14.6021 11.5L22.3575 19.2554C22.7689 19.6667 23 20.2247 23 20.8064C23 21.3882 22.7689 21.9462 22.3575 22.3575C21.9462 22.7689 21.3882 23 20.8064 23C20.2247 23 19.6667 22.7689 19.2554 22.3575L11.5 14.6022L3.74463 22.3575C3.33326 22.7689 2.77532 23 2.19355 23C1.61179 23 1.05385 22.7689 0.642476 22.3575C0.231106 21.9462 7.3961e-07 21.3882 7.3961e-07 20.8064C7.3961e-07 20.2247 0.231106 19.6667 0.642476 19.2554L8.39785 11.5L0.642476 3.74463C0.231106 3.33326 0 2.77532 0 2.19355C0 1.61179 0.231106 1.05385 0.642476 0.642477C1.05385 0.231106 1.61178 7.3961e-07 2.19355 7.3961e-07C2.77532 7.3961e-07 3.33326 0.231106 3.74463 0.642477L11.5 8.39785L19.2554 0.642477C19.6667 0.231106 20.2247 0 20.8064 0C21.3882 0 21.9462 0.231106 22.3575 0.642477C22.7689 1.05385 23 1.61178 23 2.19355C23 2.77532 22.7689 3.33326 22.3575 3.74463Z" fill="#F3F6F9"/></svg></span></li>`;
-    spisocFilms.insertAdjacentHTML('beforeend', newLiHTML);
+      // Создаем кнопку удаления (крестик)
+      const deleteButton = document.createElement("span");
+      deleteButton.className = 'crestic'
+      deleteButton.innerHTML = `<svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path opacity="0.3" d="M22.3575 3.74463L14.6021 11.5L22.3575 19.2554C22.7689 19.6667 23 20.2247 23 20.8064C23 21.3882 22.7689 21.9462 22.3575 22.3575C21.9462 22.7689 21.3882 23 20.8064 23C20.2247 23 19.6667 22.7689 19.2554 22.3575L11.5 14.6022L3.74463 22.3575C3.33326 22.7689 2.77532 23 2.19355 23C1.61179 23 1.05385 22.7689 0.642476 22.3575C0.231106 21.9462 7.3961e-07 21.3882 7.3961e-07 20.8064C7.3961e-07 20.2247 0.231106 19.6667 0.642476 19.2554L8.39785 11.5L0.642476 3.74463C0.231106 3.33326 0 2.77532 0 2.19355C0 1.61179 0.231106 1.05385 0.642476 0.642477C1.05385 0.231106 1.61178 7.3961e-07 2.19355 7.3961e-07C2.77532 7.3961e-07 3.33326 0.231106 3.74463 0.642477L11.5 8.39785L19.2554 0.642477C19.6667 0.231106 20.2247 0 20.8064 0C21.3882 0 21.9462 0.231106 22.3575 0.642477C22.7689 1.05385 23 1.61178 23 2.19355C23 2.77532 22.7689 3.33326 22.3575 3.74463Z" fill="#F3F6F9"/>
+      </svg>`;
+      
 
-    // li.textContent = docSnapshot.data().name; // Отображаем поле name
-    // li.dataset.id = docSnapshot.id; // Присваиваем ID документа в атрибут data-id
-
-    // Создаем кнопку удаления (крестик)
-    const deleteButton = document.querySelector('.crestic');
-
-    // Добавляем обработчик клика для удаления элемента
-    deleteButton.addEventListener("click", async (event) => {
-        event.stopPropagation(); // Предотвращаем срабатывание других событий на элементе
+      // Добавляем обработчик клика для удаления элемента
+      deleteButton.addEventListener("click", async (event) => {
+        event.preventDefault(); // Предотвращаем срабатывание других событий на элементе
 
         // Получаем ID из data-id атрибута элемента li
-        const itemId = newLiHTML.dataset.id;
+        const itemId = newFilm.dataset.id;
 
         // Удаляем элемент из Firestore
         await deleteItem(itemId);
 
         // Удаляем элемент из DOM
-        newLiHTML.remove();
-    });
+        newFilm.remove();
+      });
 
-    // newLiHTML.appendChild(deleteButton); // Добавляем кнопку в элемент списка
-    // spisocFilms.appendChild(newLiHTML); // Добавляем элемент списка в список
+
+
+      newFilm.appendChild(deleteButton); // Добавляем кнопку в элемент списка
+      spisocFilms.appendChild(newFilm); // Добавляем элемент списка в список
     });
-} catch (error) {
+  } catch (error) {
     console.error("Ошибка отображения данных:", error);
+  }
 }
-}
+
 
 // Функция для удаления документа из Firestore
 async function deleteItem(id) {
@@ -351,6 +302,41 @@ try {
     console.error("Ошибка удаления документа:", error);
 }
 }
+
+// Восстанавливаем состояние "ready" для фильмов при загрузке страницы
+document.addEventListener('DOMContentLoaded', async () => {
+  try {
+    const querySnapshot = await getDocs(collection(db, MOVIS_STORAGE_KEY));
+    querySnapshot.forEach((docSnapshot) => {
+      const filmData = docSnapshot.data();
+      const filmElement = document.querySelector(`.film[data-id="${filmData.id}"]`);
+      if (filmElement && filmData.ready) {
+        filmElement.classList.add('ready');
+      }
+    });
+  } catch (error) {
+    console.error("Ошибка загрузки данных:", error);
+  }
+});
+
+// Обработчик клика по списку фильмов
+spisocFilms.addEventListener('click', async function(e) {
+  const film = e.target.closest('.film');
+  if (film && !e.target.closest('.crestic')) {
+    const filmId = film.dataset.id;
+    film.classList.toggle('ready');
+    const isReady = film.classList.contains('ready');
+
+    // Обновляем состояние "ready" в Firestore
+    try {
+      const filmDoc = doc(db, MOVIS_STORAGE_KEY, filmId);
+      await setDoc(filmDoc, { id: filmId, ready: isReady }, { merge: true });
+      console.log(`Состояние фильма с ID ${filmId} обновлено в Firestore.`);
+    } catch (error) {
+      console.error("Ошибка обновления состояния в Firestore:", error);
+    }
+  }
+});
 
 // Отображаем элементы при загрузке страницы
 displayItems();
