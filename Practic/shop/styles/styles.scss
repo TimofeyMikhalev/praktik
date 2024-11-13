@@ -1,0 +1,33 @@
+@import 'media', 'normalize', 'variables', 'font';
+
+:root {
+    --color-dark: #1A1F16;
+    --color-grey: #60695C;
+    --color-red: #E5252C;
+    --color-green: #02D693;
+
+    --border-radius-btn: 14px;
+    --borer-radius: 9px;
+
+    --font-family-base: 'Open Sans', sans-serif;
+     
+}
+
+@mixin fluid-text($max: 49,$min: 16) {
+    font-size: clamp(#{$min}px, #{$max / 1440 * 100}vw, #{max}px);
+}
+
+@mixin reset-button {
+    padding: 0;
+    background-color: transparent;
+    border: none;
+}
+
+@mixin reset-link {
+    color: inherit;
+
+    &,
+    &:hover {
+        text-decoration: none;
+    }
+}
