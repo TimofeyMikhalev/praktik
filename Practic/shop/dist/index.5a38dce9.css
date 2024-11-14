@@ -56,10 +56,6 @@ body {
   line-height: 1.5;
 }
 
-svg [fill] {
-  fill: currentColor;
-}
-
 svg [stroke] {
   stroke: currentColor;
 }
@@ -90,8 +86,235 @@ svg * {
   --color-grey: #60695c;
   --color-red: #e5252c;
   --color-green: #02d693;
+  --background: #ededed;
   --border-radius-btn: 14px;
   --borer-radius: 9px;
   --font-family-base: "Open Sans", sans-serif;
+  --container-width: 953px;
+  --transition-duration: .2s;
+}
+
+body {
+  font-family: var(--font-family-base);
+  color: var(--color-dark);
+  background: var(--background);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+a, button, input, textarea, svg * {
+  transition-duration: var(--transition-duration);
+}
+
+button {
+  cursor: pointer;
+  border: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h3 {
+  font-size: 39px;
+  font-weight: 400;
+}
+
+.section {
+  margin-top: 48px;
+  display: flex;
+}
+
+.section__catalog {
+  width: var(--container-width);
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: auto;
+  margin-left: 122px;
+  display: none;
+  position: relative;
+}
+
+.section__catalog .catalog__list {
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 20px;
+  display: grid;
+}
+
+.section__catalog .catalog__list .catalog__item {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  display: flex;
+}
+
+.section__catalog .catalog__list .catalog__item .catalog-card__image {
+  margin-bottom: 16px;
+}
+
+.section__catalog .catalog__list .catalog__item .catalog-card__title {
+  margin-bottom: 8px;
+  font-size: 20px;
+}
+
+.section__catalog .catalog__list .catalog__item .catalog-card__model {
+  color: var(--color-grey);
+  margin-bottom: 19px;
+}
+
+.section__catalog .catalog__list .catalog__item .catalog-card__info {
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  display: flex;
+}
+
+.section__catalog .catalog__list .catalog__item .catalog-card__info-price {
+  font-size: 20px;
+}
+
+.section__catalog:after {
+  content: " ";
+  background: var(--color-grey);
+  border-radius: 20px;
+  width: 4px;
+  height: 850px;
+  position: absolute;
+  right: 0;
+}
+
+.section__basket {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 329px;
+  display: flex;
+}
+
+.section__basket .basket {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  display: flex;
+}
+
+.section__basket .basket__title {
+  margin-bottom: 30px;
+}
+
+.section__basket .basket__promo {
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  width: 288px;
+  height: auto;
+  margin-bottom: 40px;
+  display: grid;
+}
+
+.section__basket .basket__orders-title {
+  margin-top: 40px;
+  margin-bottom: 25px;
+}
+
+.section__basket .basket__orders-list-item {
+  font-size: 20px;
+}
+
+.section__card {
+  width: var(--container-width);
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: auto;
+  margin-left: 122px;
+  display: none;
+  position: relative;
+}
+
+.section__card-back {
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-left: 20px;
+  font-size: 20px;
+  display: flex;
+  position: relative;
+}
+
+.section__card-back:before {
+  content: "<";
+  justify-content: center;
+  align-items: center;
+  width: 15px;
+  height: 15px;
+  display: flex;
+  position: absolute;
+  left: 0;
+}
+
+.section__card-body {
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  display: flex;
+}
+
+.section__card-body .body__img {
+  margin-right: 25px;
+}
+
+.section__card-body .body__info {
+  width: 607px;
+}
+
+.section__card-body .body__info .info__title {
+  margin-bottom: 8px;
+  font-size: 62px;
+}
+
+.section__card-body .body__info .info__model {
+  color: var(--color-grey);
+  margin-bottom: 8px;
+  font-size: 31px;
+}
+
+.section__card-body .body__info .info__price {
+  margin-bottom: 8px;
+  font-size: 31px;
+}
+
+.section__card-body .body__info .info__text {
+  margin-bottom: 8px;
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+.section__card-description {
+  border-top: 4px solid #60695c;
+  width: 905px;
+}
+
+.section__card-description .description__title {
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.section__card-description .description__text {
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+.section__card:after {
+  content: " ";
+  background: var(--color-grey);
+  border-radius: 20px;
+  width: 4px;
+  height: 850px;
+  position: absolute;
+  right: 0;
 }
 /*# sourceMappingURL=index.5a38dce9.css.map */
