@@ -176,7 +176,7 @@
             </div>
         </section>
         <section class="section__card">
-            <a class="section__card-back">Список товаров</a> 
+            <a class="section__card-back back">Список товаров</a> 
            <div class="section__card-body">
                 <div class="body__img">
                     <img src="images/Product-Image 1.png" alt="" width="258" height="318">
@@ -211,9 +211,9 @@
             </div>
         </section>
         <section class="section__check">
-            <a class="section__check-back">Список товаров</a> 
-            <h3 class="check__title">Проверь корзину</h3>
-            <ul class="check__cards">
+            <a class="section__check-back back">Список товаров</a> 
+            <h3 class="section__check-title">Проверь корзину</h3>
+            <ul class="section__check-cards">
                 <li class="check__cards-item">
                     <div class="check__img">
                         <img src="images/Product-Image 1.png" alt="" width="203" height="254">
@@ -224,12 +224,198 @@
                         <p class="info__text">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam                         
                         </p>
-                        <div class="info__stars"></div>
-                        <div class="info__price">$ 529.99</div>
+                        <div class="info__stars">
+                            <div class="stars">
+                                <span class="star active" data-value="1">★</span>
+                                <span class="star active" data-value="2">★</span>
+                                <span class="star active" data-value="3">★</span>
+                                <span class="star" data-value="4">★</span>
+                                <span class="star" data-value="5">★</span>
+                              </div>
+                              <div class="info">
+                                <span id="ratingText">3 </span>/ 5
+                              </div>
+                        </div>
+                        <div class="info__price">
+                            $ 1799.99 x 1
+                            <div class="info__counter">
+                                <button class="minus" id="decrease">-</button>
+                                <span class="summ" id="number">0</span>
+                                <button class="plus" id="increase">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="check__cards-item">
+                    <div class="check__img">
+                        <img src="images/Product-Image 1.png" alt="" width="203" height="254">
+                    </div>
+                    <div class="check__info">
+                        <h2 class="info__title">Dell XPS 13</h2>
+                        <div class="info__model">White</div>
+                        <p class="info__text">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam                         
+                        </p>
+                        <div class="info__stars">
+                            <div class="stars">
+                                <span class="star active" data-value="1">★</span>
+                                <span class="star active" data-value="2">★</span>
+                                <span class="star active" data-value="3">★</span>
+                                <span class="star" data-value="4">★</span>
+                                <span class="star" data-value="5">★</span>
+                              </div>
+                              <div class="info">
+                                <span id="ratingText">3 </span>/ 5
+                              </div>
+                        </div>
+                        <div class="info__price">
+                            $ 1799.99 x 1
+                            <div class="info__counter">
+                                <button class="minus" id="decrease">-</button>
+                                <span class="summ" id="number">0</span>
+                                <button class="plus" id="increase">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="check__cards-item">
+                    <div class="check__img">
+                        <img src="images/Product-Image 1.png" alt="" width="203" height="254">
+                    </div>
+                    <div class="check__info">
+                        <h2 class="info__title">Dell XPS 13</h2>
+                        <div class="info__model">White</div>
+                        <p class="info__text">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam                         
+                        </p>
+                        <div class="info__stars">
+                            <div class="stars">
+                                <span class="star active" data-value="1">★</span>
+                                <span class="star active" data-value="2">★</span>
+                                <span class="star active" data-value="3">★</span>
+                                <span class="star" data-value="4">★</span>
+                                <span class="star" data-value="5">★</span>
+                              </div>
+                              <div class="info">
+                                <span id="ratingText">3 </span>/ 5
+                              </div>
+                        </div>
+                        <div class="info__price">
+                            $ 1799.99 x 1
+                            <div class="info__counter">
+                                <button class="minus" id="decrease">-</button>
+                                <span class="summ" id="number">0</span>
+                                <button class="plus" id="increase">+</button>
+                            </div>
+                        </div>
                     </div>
                 </li>
             </ul>
         </section>
+        <section class="section__address">
+            <a class="section__address-back back">Список товаров</a> 
+            <div class="section__address-container">
+                <div class="section__address-container--delivery">
+                    <div class="number__delivery">
+                        Заказ #11111
+                    </div>
+                    <div class="section__address-container--delivery_adress">
+                        <h3 class="title">Адрес доставки</h3>
+                        <div class="addess">
+                            <ul class="addess__info">
+                                <li class="name">Витя Иванов</li>
+                                <li class="streat">Ленинградский проспект, 27</li>
+                                <li class="city">Москва</li>
+                                <li class="number">+7 999 999 99 99</li>
+                            </ul>
+                            <button class="address__chenge">Изменить</button>
+                        </div>
+                    </div>
+                    <div class="section__address-container--delivery_pay">
+                        <h3 class="title">Способ оплаты</h3>
+                        <div class="delivery__chenge">
+                            <div class="text">Оплата картой при получении</div>
+                            <button class="chenge">Изменить</button>
+                        </div>
+                    </div>
+                    <div class="section__address-container--delivery_check">
+                        <h3 class="title">Проверь корзину</h3>
+                        <ul class="delivery__list">
+                            <li class="delivery__cards-item">
+                                <div class="delivery__img">
+                                    <img src="images/Product-Image 1.png" alt="" width="203" height="254">
+                                </div>
+                                <div class="delivery__info">
+                                    <h2 class="info__title">Dell XPS 13</h2>
+                                    <div class="info__model">White</div>
+                                    <p class="info__text">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam                         
+                                    </p>
+                                    <div class="info__stars">
+                                        <div class="stars">
+                                            <span class="star active" data-value="1">★</span>
+                                            <span class="star active" data-value="2">★</span>
+                                            <span class="star active" data-value="3">★</span>
+                                            <span class="star" data-value="4">★</span>
+                                            <span class="star" data-value="5">★</span>
+                                          </div>
+                                          <div class="info">
+                                            <span id="ratingText">3 </span>/ 5
+                                          </div>
+                                    </div>
+                                    <div class="info__price">
+                                        $ 1799.99 x 1
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="delivery__cards-item">
+                                <div class="delivery__img">
+                                    <img src="images/Product-Image 1.png" alt="" width="203" height="254">
+                                </div>
+                                <div class="delivery__info">
+                                    <h2 class="info__title">Dell XPS 13</h2>
+                                    <div class="info__model">White</div>
+                                    <p class="info__text">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam                         
+                                    </p>
+                                    <div class="info__stars">
+                                        <div class="stars">
+                                            <span class="star active" data-value="1">★</span>
+                                            <span class="star active" data-value="2">★</span>
+                                            <span class="star active" data-value="3">★</span>
+                                            <span class="star" data-value="4">★</span>
+                                            <span class="star" data-value="5">★</span>
+                                          </div>
+                                          <div class="info">
+                                            <span id="ratingText">3 </span>/ 5
+                                          </div>
+                                    </div>
+                                    <div class="info__price">
+                                        $ 1799.99 x 1
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="section__address-container--sums">
+                    <ul class="sums__link">
+                        <li class="sums__title">Сумма</li>
+                        <li class="sums__product">Товары:<span>$ 5849.37</span></li>
+                        <li class="sums__product">Доставка:<span>$ 6.99</span></li>
+                        <li class="sums__itog">Стоимость:<span>$ 6609.78</span></li>
+                        <button class="sums__place">Разместить заказ</button>
+                    </ul>
+                  
+    
+                </div>
+            </div>
+        </section>
+        <section class="section__pusto">
+            <a class="section__address-back back">Список товаров</a> 
+            <div class="pusto__title">Корзина пуста</div>
+        </section>
+
         <section class="section__basket">
             <div class="basket">
                 <h3 class="basket__title">Корзина</h3>
@@ -256,8 +442,30 @@
             </div>      
         </section>
 
-
-
+        <section class="section__popap">
+            <form class="section__popap-change--adress">
+                <label for="name">Имя</label>
+                <input type="text" id="name" name="name" placeholder="Витя Иванов">
+                <label for="streat">Улица, дом</label>
+                <input type="text" id="streat" name="streat" placeholder="Ленинградский проспект, 27">
+                <label for="city">Город</label>
+                <input type="text" id="city" name="city" placeholder="Москва">
+                <label for="tel">Телефон</label>
+                <input type="tel" id="tel" name="tel" placeholder="+7 999 999 99 99">
+                <button class="form__btn" type="submit" form="form" value="Сохранить">Сохранить</button>
+            </form>
+            <form class="section__popap-change--pay">
+                <label class="radio-button">
+                    <input type="radio" name="option" value="1">
+                    <span></span> Оплата картой при получении
+                </label>
+                <label class="radio-button">
+                    <input type="radio" name="option" value="2">
+                    <span></span> Оплата наличными при получении
+                </label>
+                <button class="form__btn" type="submit" form="form" value="Сохранить">Сохранить</button>
+            </form>
+        </section>
 
     </main>
     
