@@ -141,7 +141,6 @@ h3 {
 
 .section__catalog .catalog__list {
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 20px;
   display: grid;
 }
 
@@ -150,11 +149,16 @@ h3 {
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  padding: 16px;
   display: flex;
 }
 
 .section__catalog .catalog__list .catalog__item .catalog-card__image {
   margin-bottom: 16px;
+}
+
+.section__catalog .catalog__list .catalog__item .catalog-card__image img {
+  border-radius: 22px;
 }
 
 .section__catalog .catalog__list .catalog__item .catalog-card__title {
@@ -626,6 +630,7 @@ h3 {
   align-items: center;
   width: 329px;
   display: flex;
+  position: relative;
 }
 
 .section__basket .basket {
@@ -647,6 +652,10 @@ h3 {
   height: auto;
   margin-bottom: 40px;
   display: grid;
+}
+
+.section__basket .basket__orders {
+  display: none;
 }
 
 .section__basket .basket__orders-title {
@@ -777,13 +786,21 @@ h3 {
   left: 0;
 }
 
-.section__catalog:after, .section__card:after, .section__check:after {
+.section__basket:before {
   content: " ";
   background: var(--color-grey);
   border-radius: 20px;
   width: 4px;
   height: 850px;
   position: absolute;
-  right: 0;
+  left: 0;
+}
+
+.section .show {
+  display: flex;
+}
+
+.section .turn {
+  display: none;
 }
 /*# sourceMappingURL=index.5a38dce9.css.map */
