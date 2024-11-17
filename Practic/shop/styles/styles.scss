@@ -150,8 +150,16 @@ h3 {
             justify-content: flex-start;
             align-items: flex-start;
             margin-bottom: 20px;
+            
             .body__img {
                 margin-right: 25px;
+                width: 274px;
+                height: 334px;
+                img {
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 20px;
+                }
             }
             .body__info {
                 width: 607px;
@@ -588,6 +596,9 @@ h3 {
                 width: 288px;
                 height: auto;
                 margin-bottom: 40px;
+                img {
+                    border-radius: 13px;
+                }
             }
             &__orders {
                 display: none;

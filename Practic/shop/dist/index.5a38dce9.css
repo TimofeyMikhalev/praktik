@@ -201,7 +201,15 @@ h3 {
 }
 
 .section__card-body .body__img {
+  width: 274px;
+  height: 334px;
   margin-right: 25px;
+}
+
+.section__card-body .body__img img {
+  border-radius: 20px;
+  width: 100%;
+  height: 100%;
 }
 
 .section__card-body .body__info {
@@ -652,6 +660,10 @@ h3 {
   height: auto;
   margin-bottom: 40px;
   display: grid;
+}
+
+.section__basket .basket__promo img {
+  border-radius: 13px;
 }
 
 .section__basket .basket__orders {
