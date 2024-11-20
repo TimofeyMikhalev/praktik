@@ -666,6 +666,12 @@ h3 {
   border-radius: 13px;
 }
 
+.section__basket .basket__sum {
+  margin-bottom: 32px;
+  font-size: 20px;
+  display: none;
+}
+
 .section__basket .basket__orders {
   display: none;
 }

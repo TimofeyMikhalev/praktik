@@ -600,6 +600,11 @@ h3 {
                     border-radius: 13px;
                 }
             }
+            &__sum {
+                display: none;
+                font-size: 20px;
+                margin-bottom: 32px;
+            }
             &__orders {
                 display: none;
                 &-title {
