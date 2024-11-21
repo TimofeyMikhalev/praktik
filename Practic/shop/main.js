@@ -124,6 +124,7 @@ async function getProducts() {
                 const product = products[productId]; // Находим нужный объект
                 addPromoBasket(product); // Передаем объект в функцию
                 sumBasketFun(product)
+                
                 containerCheck.innerHTML +=  `
                 <li class="check__cards-item">
                 <div class="check__img">
