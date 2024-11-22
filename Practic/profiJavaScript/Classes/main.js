@@ -276,6 +276,7 @@ class TaskView {
             taskItem.textContent = task;
             const deleteButton = document.createElement("button");
             deleteButton.textContent = "Удалить";
+
             deleteButton.dataset.index = index;
             taskItem.append(deleteButton);
             this.taskList.append(taskItem);
@@ -340,8 +341,8 @@ class ModelStetchik {
     minusSum(value) {
         this.sum += value
     }
-    plusSum() {
-        this.sum -= value
+    plusSum(sums) {
+        this.sum -= sums
     }
     sumSum() {
         return this.sum
@@ -351,15 +352,29 @@ class ModelStetchik {
 class ViewStetchik {
     constructor() {
         this.shectik = document.querySelector('#schetchik')
+
         this.display = document.createElement('div')
+        this.display.textContent = 0
+
         this.plusBtn = document.createElement('button')
         this.plusBtn.textContent = '+'
 
-        this.shectik.append(this.display, this.plusBtn)
+        this.minusBtn = document.createElement('button')
+        this.minusBtn.textContent = '-'
+
+        this.shectik.append(this.display, this.plusBtn, this.minusBtn)
     }
 
-    displayChechik(sum) {
-        this.display.innerHTML = ''
+    displayAdd() {
+        this.plusBtn.addEventListener('click', () => {
+            this.display.textContent++
+        })
+    }
+
+    displayDelete() {
+        this.minusBtn.addEventListener('click', () => { 
+            this.display.textContent--
+        })
     }
 }
 
@@ -368,9 +383,190 @@ class ControllerStetchik {
         this.model = model
         this.view = view
 
-        
+        this.view.displayAdd(this.sumAdd.bind(this))
+        this.view.displayDelete(this.sumDelete.bind(this))
+
+        this.update()
     }
+
+    sumAdd(sums) {
+        this.model.plusSum(sums)
+        this.update()
+    }
+
+    sumDelete(value) {
+        this.model.minusSum(value)
+        this.update()
+    }
+    update() {
+        const sums = this.model.sumSum()
+        this.view.displayAdd(sums)
+    }
+
 }
 
 // Инициализация
 const shetchik = new ControllerStetchik(new ModelStetchik(), new ViewStetchik());
+
+
+//Задача 2: Список дел (To-Do List)
+
+class ModelToDO {
+    constructor() {
+        this.list = []
+    }
+
+    addList(rag) {
+        this.list.push(rag)
+    }
+    deleteList(index) {
+        this.list.splice(index, 1)
+    }
+    statusList() {
+        this.list = true
+    }
+    getList() {
+        return this.list
+    }
+    
+}
+
+class ViewToDo {
+    constructor() {
+        this.todo = document.querySelector('#todo')
+        this.todoInput = document.createElement('input')
+        this.todoInput.type = 'text'
+        this.todoButton = document.createElement('button')
+        this.todoButton.textContent = 'Добавить'
+        this.todoList = document.createElement('ul')
+
+        this.todo.append(this.todoInput, this.todoButton, this.todoList)
+    }
+
+    displayList(list) {
+        this.todoList.innerHTML = ''
+        list.forEach((index, list) => {
+            const todoLi = document.createElement('li')
+            todoLi.textContent = list;
+            const deletLi = document.createElement('button')
+            deletLi.textContent = 'Удалить'
+
+            deletLi.dataset.index = index
+            todoLi.append(deletLi)
+            this.todoList.append(todoLi)
+        })
+    }
+
+    addList(ops) {
+        this.todoInput.addEventListener('click', () => {
+            ops(this.todoInput.value)
+            this.todoInput.value = ''
+        })
+    }
+    deleteList(ops) {
+        this.todoList.addEventListener('click', (event) => {
+            if(event.target.tagName === "BUTTON") {
+                const index = event.target.dataset.index;
+                ops(index)
+            }
+        })
+    }
+}
+
+class ControllerToDo {
+    constructor(model, view) {
+        this.model = model
+        this.view = view
+
+        this.view.addList(this.opsAddList.bind(this))
+        this.view.deleteList(this.opsDeleteList(this))
+
+        this.update()
+    }
+
+    opsAddList(list) {
+        this.model.addList(list)
+        this.update()
+    }
+    opsDeleteList(index) {
+        this.model.deleteList(index)
+        this.update()
+    }
+    update() {
+        const lists = this.model.getList()
+        this.view.displayList(lists)
+    }
+
+}
+
+const todo = new ControllerToDo(new ModelToDO(), new ViewToDo())
+
+
+//Задача 3: Калькулятор
+
+
+
+//1
+class Person {
+    constructor(name, age) {     
+        this.name = name
+        this.age = age
+    }
+
+    introduce() {
+        console.log(`Привет, меня зовут ${this.name} и мне ${this.age} лет.`)
+    }
+}
+
+const person = new Person('Tima', 25)
+person.introduce()
+
+//2
+class Rectangle {
+    constructor(a, b) {
+        this.a = a
+        this.b = b
+    }
+
+    calculateArea() {
+        console.log(this.a * this.b)
+    }
+    calculatePerimeter() {
+        console.log((this.a + this.b) * 2)
+    }
+}
+
+const rectangle = new Rectangle(4, 5)
+rectangle.calculateArea()
+rectangle.calculatePerimeter()
+
+//3
+class Employee extends Person{
+    constructor(name, age, position) {
+        super(name, age)// Вызов конструктора родителя
+        this.position = position
+    }
+
+    work() {
+        console.log(`Я работаю как ${this.position}.`)
+    }
+}
+
+const empolyee = new Employee('Bmw', 25, 'Car')
+empolyee.work()
+
+//4
+
+class ShoppingCart {
+
+
+    addItem(item) {
+
+    }
+    removeItem(item) {
+
+    }
+    getTotalPrice() {
+
+    }
+}
