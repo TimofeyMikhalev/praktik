@@ -558,15 +558,117 @@ empolyee.work()
 //4
 
 class ShoppingCart {
-
+    constructor() {
+        this.sumTovar = []
+    }
+   
 
     addItem(item) {
-
+        this.sumTovar.push(item)
     }
-    removeItem(item) {
-
+    removeItem(itemName) {
+        this.sumTovar = this.sumTovar.filter(item => item.name !== itemName)
     }
     getTotalPrice() {
+        return this.sumTovar.reduce((total, item) => total + item.price, 0)
+    }
+}
+
+const shop = new ShoppingCart()
+shop.addItem({ name: 'Яблоко', price: 50 });
+shop.addItem({ name: 'Хлеб', price: 30 });
+shop.addItem({ name: 'Молоко', price: 60 });
+
+console.log(shop.getTotalPrice()); // 140
+shop.removeItem('Хлеб');
+console.log(shop.getTotalPrice()); // 110
+
+
+//1. Управление списком пользователейё
+
+
+class User {
+    constructor(id, name, email, role) {
+        this.id = id
+        this.name = name
+        this.email = email
+        this.role = role
+    }
+
+}
+
+class UserManager {
+    constructor() {    
+        this.users = []
+    }
+
+    addUser(user) {
+        this.users.push(user)
+    }
+   
+    removeUser(id) {
+        this.users = this.users.filter(user => user.id !== id)
+    }
+
+    updateUser(id, newUserData) {
+        const user = this.getUserById(id)
+        if(user) {
+            Object.assign(user, newUserData);
+        }
+    }
+
+    getUserById(id) {
+        return this.users.find(user => user.id === id)
+    }
+
+    getAllUsers() {
+        return this.users
+    }
+}
+
+// Пример использования
+const manager = new UserManager();
+manager.addUser(new User(1, 'Alice', 'alice@example.com', 'admin'));
+manager.addUser(new User(2, 'Bob', 'bob@example.com', 'user'));
+console.log(manager.getAllUsers());
+manager.updateUser(2, { name: 'Robert' });
+console.log(manager.getUserById(2));
+
+
+//2. Мини-система управления продуктами
+class Product {
+    constructor(id, name, price, category, stock) {
+        this.id = id
+        this.name = name
+        this.price = price
+        this.category = category
+        this.stock = stock
+    }
+   
+}
+
+class ProductManager {
+    constructor() {
+        this.product = []
+    }
+
+    addProduct(product) {
+
+    }
+
+    removeProduct(id) {
+
+    }
+
+    getProductById(id) {
+
+    }
+    
+    searchProducts(query) {
+
+    }
+
+    updateStock(id, quantity) {
 
     }
 }

@@ -16,7 +16,8 @@ let btnPrevChech = document.querySelector('.section__check');
 let promoBasket = document.querySelector('.basket__promo');
 let sumBasket = document.querySelector('.basket__sum');
 
-
+//сумма в корзине
+let result = []
 
 //Открытие карточки с подробной информацией
 function openCard(product) {
@@ -48,19 +49,24 @@ function openCard(product) {
 
 }
 
+//отображение маленькой картинки корзина
 function addPromoBasket(product) {
     promoBasket.innerHTML += `<img src="${product.image}" alt="" width="80" height="80">`
 }
 
+
+
 //Сумма в корзине
 function sumBasketFun(product) {
-    // let a = Number(product.price)
-    // let result = 0
+    let sum = 0;
 
-    // for(let i = a; i < a.length;i++) {
-    //     return console.log(a[i])
-    // }
-    // sumBasket.innerHTML = result
+    result.push(product.price)
+    
+    result.forEach(item => {
+        sum += item
+    })
+
+    sumBasket.innerHTML = '$' + sum.toFixed(2)
 }
 
 //Добавление товаров на страницу из api
@@ -105,7 +111,6 @@ async function getProducts() {
             catalog.append(productCard)
         })
 
-
         // Обработчик клика для карточки
         let containerCard = document.querySelectorAll('.container__card');
         containerCard.forEach(card => {
@@ -123,8 +128,10 @@ async function getProducts() {
                 const productId = event.currentTarget.dataset.id; // Получаем индекс
                 const product = products[productId]; // Находим нужный объект
                 addPromoBasket(product); // Передаем объект в функцию
-                sumBasketFun(product)
-                
+                sumBasketFun(product)//сумма за товары
+
+   
+         
                 containerCheck.innerHTML +=  `
                 <li class="check__cards-item">
                 <div class="check__img">
@@ -152,25 +159,43 @@ async function getProducts() {
                         $ ${product.price} x 1
                         <div class="info__counter">
                             <button class="minus" id="decrease">-</button>
-                            <span class="summ" id="number">0</span>
+                            <span class="summ" id="number">1</span>
                             <button class="plus" id="increase">+</button>
                         </div>
                     </div>
                 </div>
             </li>
-                `
- 
+                `   
             });
         });
 
-
-
+        
     } catch(error) {
         console.log('Ошибка получения данных', error)
     }
 
 }
 getProducts()
+
+
+async function numberElements() {
+    console.log(infoCounterDisplayResult += 1)
+}
+
+
+//колличество товаров одной единицы
+let infoCounterMinus = document.querySelector('#increase')
+let infoCounterDisplay = document.querySelector('#number')
+let infoCounterDisplayResult = 0
+
+let infoCounterPlus = document.querySelectorAll('.plus')
+
+infoCounterPlus.forEach(button => {
+    button.addEventListener('click', () => {
+        
+    })
+})
+
 
 
 //Переход в корзину
@@ -195,4 +220,16 @@ btnPrevChech.addEventListener('click', () => {
 })
 
 
+
+
+
+
+// Проверяем, есть ли счетчик в localStorage
+// let count = localStorage.getItem('visitCount') || 0;
+// count = parseInt(count) + 1
+
+// // Обновляем значение в localStorage
+// localStorage.setItem('visitCount', count);
+
+// console.log(`Вы посетили эту страницу ${count} раз(а).`);
 

@@ -158,7 +158,7 @@ let inputAdd = document.querySelector('.search__films');
 let btnInput = document.querySelector('.search__btn');
 
 
-// // Удаление фильма из списка
+// Удаление фильма из списка
 // spisocFilms.addEventListener('click', async function(e) {
 //     const btn = e.target.closest('.crestic');
 //     // if (btn) {
