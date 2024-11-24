@@ -653,22 +653,129 @@ class ProductManager {
     }
 
     addProduct(product) {
-
+        this.product.push(product)
     }
 
     removeProduct(id) {
-
+        this.product = this.product.filter(item => item.id !== id)
     }
 
     getProductById(id) {
-
+        return this.product.find(item => item.id === id) || null
     }
     
     searchProducts(query) {
-
+        query = query.toLowerCase()
+        return this.product.filter(item => 
+            item.name.toLowerCase().includes(query) ||
+            item.category.toLowerCase().includes(query)
+        )
     }
 
     updateStock(id, quantity) {
-
+        const product = getProductById(id)
+        if(product) {
+            product.stock += quantity
+        } else {
+            console.log("Product not found.");
+        }
     }
 }
+
+
+
+
+
+//MVC 
+
+// Пример на JavaScript: Управление списком задач (TODO)
+
+// Шаг 1. Модель:
+// Модель хранит список задач и управляет данными.
+class TaskiModel {
+    constructor() {
+        this.tasks = [];
+    }
+
+    addTask(task) {
+        this.tasks.push(task);
+    }
+
+    removeTask(task) {
+        this.tasks = this.tasks.filter(t => t !== task);
+    }
+
+    getTasks() {
+        return this.tasks;
+    }
+}
+
+
+// Шаг 2. Представление:
+// Представление отвечает за отображение данных.
+
+class TaskiView {
+    constructor() {
+        this.app = document.getElementById('app');
+        this.taskList = document.createElement('ul');
+        this.input = document.createElement('input');
+        this.addButton = document.createElement('button');
+        this.addButton.textContent = 'Add Task';
+
+        this.app.append(this.input, this.addButton, this.taskList);
+    }
+
+    displayTasks(tasks) {
+        this.taskList.innerHTML = '';
+        tasks.forEach(task => {
+            const li = document.createElement('li');
+            li.textContent = task;
+            this.taskList.appendChild(li);
+        });
+    }
+
+    bindAddTask(handler) {
+        this.addButton.addEventListener('click', () => {
+            if (this.input.value) {
+                handler(this.input.value);
+                this.input.value = '';
+            }
+        });
+    }
+
+    bindRemoveTask(handler) {
+        this.taskList.addEventListener('click', event => {
+            if (event.target.tagName === 'LI') {
+                handler(event.target.textContent);
+            }
+        });
+    }
+}
+// Шаг 3. Контроллер:
+// Контроллер управляет взаимодействием между моделью и представлением.
+class TaskiController {
+    constructor(model, view) {
+        this.model = model;
+        this.view = view;
+
+        this.view.bindAddTask(this.handleAddTask.bind(this));
+        this.view.bindRemoveTask(this.handleRemoveTask.bind(this));
+        this.view.displayTasks(this.model.getTasks());
+    }
+
+    handleAddTask(task) {
+        this.model.addTask(task);
+        this.view.displayTasks(this.model.getTasks());
+    }
+
+    handleRemoveTask(task) {
+        this.model.removeTask(task);
+        this.view.displayTasks(this.model.getTasks());
+    }
+}
+
+
+
+const appis = new TaskiController(new TaskiModel(), new TaskiView());
+
+
