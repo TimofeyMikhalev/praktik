@@ -15,7 +15,7 @@ let sumBasket = document.querySelector(".basket__sum");
 //сумма в корзине
 let result = [];
 //Открытие карточки с подробной информацией
-function openCard(product) {
+async function openCard(product) {
     modalCards.innerHTML = `
         <div class="body__img">
             <img src="${product.image}" alt="" width="258" height="318">
@@ -41,11 +41,11 @@ function openCard(product) {
     sectionCard.classList.toggle("show");
 }
 //отображение маленькой картинки корзина
-function addPromoBasket(product) {
+async function addPromoBasket(product) {
     promoBasket.innerHTML += `<img src="${product.image}" alt="" width="80" height="80">`;
 }
 //Сумма в корзине
-function sumBasketFun(product) {
+async function sumBasketFun(product) {
     let sum = 0;
     result.push(product.price);
     result.forEach((item)=>{

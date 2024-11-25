@@ -744,7 +744,7 @@ class TaskiView {
     }
 
     bindRemoveTask(handler) {
-        this.taskList.addEventListener('click', event => {
+        this.taskList.addEventListener('click', (event) => {
             if (event.target.tagName === 'LI') {
                 handler(event.target.textContent);
             }
@@ -778,4 +778,98 @@ class TaskiController {
 
 const appis = new TaskiController(new TaskiModel(), new TaskiView());
 
+
+//	2.	Список покупок:
+//Модель: Хранит список покупок и их статусы (куплено/нет).
+
+class PurchasesModel {
+    constructor() {
+        this.purchases = []
+    }
+
+    addParchases(item) {
+        this.purchases.push({ name: item, purchased: false })
+    }
+
+    toggleaddParchasesStatus(index) {
+        this.purchases[index].purchased = !this.purchases[index].purchased;
+    }
+
+    removeParchases() {
+        this.purchases.splice(index, 1)
+    }
+
+    getParchases() {
+        return this.purchases
+    }
+}
+
+class PurchasesView {
+    constructor() {
+        this.productApp = document.querySelector('#productApp')
+        this.productList = document.createElement('ul')
+        this.inputProduct = document.createElement('input')
+        this.btnProduct = document.createElement('button')
+        this.btnProduct.textContent = 'Добавить товар'
+        this.btnRemoveProduct = document.createElement('button')
+        this.btnRemoveProduct.textContent = 'Удалить товар'
+
+        this.productApp.append(this.productList, this.inputProduct, this.btnProduct, this.btnRemoveProduct)
+    }
+
+    displayProduct(purchases) {
+        this.productList.innerHTML = ''
+        purchases.forEach((item, index) => {
+            const li = document.createElement('li')
+            li.textContent = item.name + (item.purchases ? ' (Purchases) ' : '')
+            li.dataset.index = index
+            this.productList.appendChild(li)
+        })
+    }
+
+    addProduct(pro) {
+        this.btnProduct.addEventListener('click', () => {
+            if(this.inputProduct.value.trim()) {
+                pro(this.inputProduct.value.trim())
+                this.inputProduct.value = ''
+            } 
+        })
+    }
+
+    removeProduct(pro) {
+        this.btnRemoveProduct.addEventListener('click', (e) => {
+            if(e.target.this.btnRemoveProduct) {
+                pro(e.target.dataset.index)
+            }
+        })
+    }
+}
+
+
+class PurchasesController {
+    constructor(model, view) {
+        this.model = model 
+        this.view = view
+
+        this.view.addProduct(this.handAddProduct.bind(this))
+        this.view.removeProduct(this.handRemoveProduct(this))
+        this.updateView();
+    }
+
+    handAddProduct(product) {
+        this.model.addParchases(product)
+        this.updateView();
+    }
+
+    handRemoveProduct(product) {
+        this.model.removeParchases(product)
+        this.updateView();
+    }       
+    updateView() {
+        this.view.renderList(this.model.getParchases());
+    }
+}
+
+
+const productApp = new PurchasesController(new PurchasesView(), new PurchasesModel())
 
